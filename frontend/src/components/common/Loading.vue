@@ -1,0 +1,37 @@
+<template>
+  <div class="loading-overlay" v-if="show">
+    <div class="spinner"></div>
+  </div>
+</template>
+
+<script setup lang="ts">
+const props = defineProps<{ show: boolean }>();
+</script>
+
+<style scoped>
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(55, 0, 255, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.spinner {
+  width: 60px;
+  height: 60px;
+  border: 6px solid #d7ccff; 
+  border-top-color: #3700ff;  
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+</style>
