@@ -14,17 +14,23 @@ const email = ref('')
 const password = ref('')
 const serverError = ref('')
 
-import { authService } from '@/services/authService'
-
 const onSubmit = async () => {
   serverError.value = ''
-  try {
-    const { user, tokens } = await authService.login(email.value, password.value)
 
-    authStore.login(user, tokens.accessToken)
-    localStorage.setItem('token', tokens.accessToken)
-    api.defaults.headers.common['Authorization'] = `Bearer ${tokens.accessToken}`
-    router.push('/account')
+  try {
+    const res = await api.post('/auth/login', {
+      email: email.value,
+      password: password.value
+    })
+
+    const user: User = res.data.user
+    const token: string = res.data.tokens.accessToken 
+
+authStore.login(user, token)
+localStorage.setItem('token', token) 
+
+api.defaults.headers.common['Authorization'] = `Bearer ${token}`
+router.push('/account')
   } catch (err: any) {
     serverError.value = err.response?.data?.message || 'Помилка входу'
   }
