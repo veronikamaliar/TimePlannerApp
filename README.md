@@ -102,7 +102,7 @@ URL: https://time-planner-app.onrender.com/
 
 ### Frontend
 Задеплоєно на: Vercel
-URL: https://myapp.vercel.app
+URL: https://time-app-liart.vercel.app
 
 ## 📁 Структура проєкту
 
