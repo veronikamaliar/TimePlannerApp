@@ -22,37 +22,48 @@ const { handleSubmit, setValues } = useForm<CategoryFormData>({
 
 onMounted(async () => {
   try {
-    const res = await categoriesService.getById(categoryId)
-    const category = res?.data
-    if (category) {
-      setValues({ name: category.name })
-    }
+    const category = await categoriesService.getById(categoryId)
+
+    setValues({
+      name: category.name
+    })
   } catch (error: any) {
     console.error('Update category error:', error)
-    const msg = error.response?.data?.message || error.message || 'Помилка завантаження категорії'
+
+    const msg =
+      error.response?.data?.message ||
+      error.message ||
+      'Помилка завантаження категорії'
+
     toast.error(msg)
     serverError.value = msg
   }
 })
 
+
 const onSubmit = handleSubmit(async (values) => {
   serverError.value = ''
+
   try {
-    const res = await categoriesService.update(categoryId, { name: values.name })
-
-    console.log('UPDATE RESPONSE:', res)
-
-    const updatedCategory = res?.data ?? { name: values.name }
+    const updatedCategory = await categoriesService.update(categoryId, {
+      name: values.name
+    })
 
     toast.success(`Категорію "${updatedCategory.name}" успішно оновлено!`)
     router.push('/dashboard/categories')
   } catch (error: any) {
     console.error('Update submit error:', error)
-    const msg = error.response?.data?.message || error.message || 'Помилка оновлення'
+
+    const msg =
+      error.response?.data?.message ||
+      error.message ||
+      'Помилка оновлення'
+
     toast.error(msg)
     serverError.value = msg
   }
 })
+
 const cancel = () => {
   router.push('/dashboard/categories')
 }

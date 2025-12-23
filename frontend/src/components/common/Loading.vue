@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps<{ show: boolean }>();
+defineProps<{ show: boolean }>();
 </script>
 
 <style scoped>

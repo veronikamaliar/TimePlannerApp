@@ -69,15 +69,13 @@ const onSubmit = handleSubmit(async (values) => {
 
     <form @submit.prevent="onSubmit" class="bg-white rounded-lg shadow p-6 space-y-4">
 
-      <Field name="title" v-slot="{ field, meta }">
+      <Field name="title" v-slot="{ field }">
         <input
           v-bind="field"
           class="w-full border p-2 rounded"
           placeholder="Введіть назву"
         />
-        <p v-if="meta.touched && meta.errorMessage" class="text-red-500 text-sm">
-          {{ meta.errorMessage }}
-        </p>
+        
       </Field>
 
       <Field name="description" v-slot="{ field }">

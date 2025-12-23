@@ -4,7 +4,7 @@ interface Task {
   title: string;
 }
 
-const props = defineProps<{
+defineProps<{
   dayNumber: number | null;
   tasks: Task[];
   isToday?: boolean;
