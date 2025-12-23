@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue';
-import Checkbox from '@/components/common/Checkbox.vue';
 import Button from '@/components/common/Button.vue';
 
 interface Task {
