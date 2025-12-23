@@ -44,28 +44,24 @@ app.use(
 
 // CORS
 const allowedOrigins = [
-  process.env.BASE_URL,
-  "http://localhost:3000",
-  "http://127.0.0.1:5500",
-  "http://localhost:5500",
-  "http://localhost:5173",
   'https://time-app-liart.vercel.app',
-];
+  'http://localhost:5173',
+]
 
-app.use(
-  cors({
-    origin: function(origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+}))
+
+app.options('*', cors())
 
 // Rate limiting 
 const limiter = rateLimit({
